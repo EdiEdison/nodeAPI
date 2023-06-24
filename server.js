@@ -2,7 +2,10 @@ const express = require("express")
 const mongoose = require("mongoose")
 const portfolio = require('./models/productModel')
 
+const cors = require('cors')
+
 const app = express()
+app.use(cors());
 
 app.use(express.json())
 
@@ -27,7 +30,7 @@ app.get('/portfolio/:id', async(req, res) => {
         const someportfolio = await portfolio.findById(id);
         res.status(200).json(someportfolio)
     } catch (error) {
-        res.status(500).json({message: erro.message})
+        res.status(500).json({message: error.message})
     }
 })
 
@@ -46,8 +49,8 @@ mongoose.
 connect('mongodb+srv://ediedisonfornang:admin123@cluster0.cvslnoe.mongodb.net/Node-API?retryWrites=true&w=majority')
 .then(()=> {
     console.log("Connected");
-    app.listen(3000, ()=> {
-        console.log("Node Api is running on port 3000");
+    app.listen(5000, ()=> {
+        console.log("Node Api is running on port 5000");
     })
 }).catch((error)=> {
     console.log(error);
